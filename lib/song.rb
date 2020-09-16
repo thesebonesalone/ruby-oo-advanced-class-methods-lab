@@ -41,49 +41,17 @@ class Song
     self.all.sort_by { |value| value.name}
   end
   def self.new_from_filename(name)
-    song_array = name.split
-    passed_breaker = false
-    name = ""
-    artist = ""
-    song_array.each do |value|
-      if value == "-"
-        passed_breaker = true
-      end
-      if passed_breaker == false
-        artist = value
-      else
-        if value != "-"
-        name += value + " "
-        end
-      end
-    end
-    name = name.delete_suffix(".mp3 ")
+    song_array = name.split(" - ")
     @song = self.new
-    @song.name = name
-    @song.artist_name = artist
+    @song.name = song_array[1].delete_suffix(".mp3")
+    @song.artist_name = song_array[0]
     @song
   end
   def self.create_from_filename(name)
-    song_array = name.split
-    passed_breaker = false
-    name = ""
-    artist = ""
-    song_array.each do |value|
-      if value == "-"
-        passed_breaker = true
-      end
-      if passed_breaker == false
-        artist = value
-      else
-        if value != "-"
-        name += value + " "
-        end
-      end
-    end
-    name = name.delete_suffix(".mp3 ")
+    song_array = name.split(" - ")
     @song = self.create
-    @song.name = name
-    @song.artist_name = artist
+    @song.name = song_array[1].delete_suffix(".mp3")
+    @song.artist_name = song_array[0]
     @song
   end
   def self.destroy_all
